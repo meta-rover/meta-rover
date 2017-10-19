@@ -32,10 +32,11 @@ inherit pkgconfig cmake
 #inherit cmake
 
 do_install() {
-# In case a binary needs to be installed
-#    install -d ${D}${bindir}
-    #install -d ${B}/src/libraspicam.so* ${D}${libdir}
-    #install -d ${B}/src/libraspicam_cv.so* ${D}${libdir}
+    # In case a binary needs to be installed
+    # install -d ${D}${bindir}
+    
+    # install -d ${B}/src/libraspicam.so* ${D}${libdir}
+    # install -d ${B}/src/libraspicam_cv.so* ${D}${libdir}
 
     # We chose to install manually here, TODO: any improvements welcome
     mkdir -p ${D}${libdir}
