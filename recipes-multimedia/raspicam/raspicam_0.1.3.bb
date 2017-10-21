@@ -16,6 +16,7 @@ PR = "r0"
 # If your build system does not have opencv recipe, then you can test still by commenting below line
 # The following is required for this recipe to be cross-compiled.
 DEPENDS = "opencv"
+PROVIDES = "raspicam"
 
 # For do_package
 PACKAGES = "${PN} ${PN}-dev ${PN}-dbg ${PN}-staticdev"
@@ -39,7 +40,9 @@ inherit pkgconfig cmake
 
 do_install() {
     # Installing libraries
+    # Create directory
     install -d ${D}${libdir}
+    # Copy library
     install -m 0755 ${B}/src/libraspicam.so* ${D}${libdir}
     
     # If raspicam is compiled with opencv
