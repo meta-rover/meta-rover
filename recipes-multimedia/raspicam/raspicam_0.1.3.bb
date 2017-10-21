@@ -14,10 +14,17 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD;md5=3775480a712fc46a6964767
 PR = "r0" 
 
 # If your build system does not have opencv recipe, then you can test still by commenting below line
+# The following is required for this recipe to be cross-compiled.
 DEPENDS = "opencv"
 
-#For do_package
+# For do_package
+PACKAGES = "${PN} ${PN}-dev ${PN}-dbg ${PN}-staticdev"
 FILES_${PN} += " ${libdir}/*"
+
+# Runtime dependencies of created packages
+RDEPENDS_${PN}-staticdev = ""
+RDEPENDS_${PN}-dev = ""
+RDEPENDS_${PN}-dbg = ""
 
 #Fetching from git repo
 SRC_URI = "git://github.com/6by9/raspicam-0.1.3.git;protocol=https;branch=master"
@@ -29,21 +36,26 @@ SRCREV = "${AUTOREV}"
 S = "${WORKDIR}/git" 
 
 inherit pkgconfig cmake
-#inherit cmake
 
 do_install() {
-    # In case a binary needs to be installed
-    # install -d ${D}${bindir}
+    # Installing libraries
+    install -d ${D}${libdir}
+    install -m 0755 ${B}/src/libraspicam.so* ${D}${libdir}
     
-    # install -d ${B}/src/libraspicam.so* ${D}${libdir}
-    # install -d ${B}/src/libraspicam_cv.so* ${D}${libdir}
+    # If raspicam is compiled with opencv
+    if [ -f "${B}/src/libraspicam_cv.so"]; then
+        install -m 0755 ${B}/src/libraspicam_cv.so* ${D}${libdir}
+    fi
 
-    # We chose to install manually here, TODO: any improvements welcome
-    mkdir -p ${D}${libdir}
-    cp -r ${B}/src/libraspicam.so* ${D}${libdir}
+    # At local.conf be sure to add library as
+    # IMAGE_INSTALL_append = "raspicam-staticdev"
+
+    # If we chose to install manually here, without packing concerns:
+    #mkdir -p ${D}${libdir}
+    #cp -r ${B}/src/libraspicam.so* ${D}${libdir}
     
     # If OpenCV library is also compiled, install it too
-    if [ -f "${B}/src/libraspicam_cv.so"]; then
-         cp -r ${B}/src/libraspicam_cv.so* ${D}${libdir}
-    fi
+    #if [ -f "${B}/src/libraspicam_cv.so"]; then
+    #     cp -r ${B}/src/libraspicam_cv.so* ${D}${libdir}
+    #fi
 }
