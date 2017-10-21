@@ -62,3 +62,7 @@ II. Misc
 ========
 
 --- replace with specific information about the rover layer ---
+
+In your build system under conf/local.conf
+Add 
+LICENSE_FLAGS_WHITELIST="commercial"

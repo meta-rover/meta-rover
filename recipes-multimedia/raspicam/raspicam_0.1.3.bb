@@ -27,8 +27,8 @@ RDEPENDS_${PN}-staticdev = ""
 RDEPENDS_${PN}-dev = ""
 RDEPENDS_${PN}-dbg = ""
 
-#Fetching from git repo
-SRC_URI = "git://github.com/6by9/raspicam-0.1.3.git;protocol=https;branch=master"
+#Fetching from git repo, ${PV} is package version automatically extracted from filename
+SRC_URI = "git://github.com/6by9/raspicam-${PV}.git;protocol=https;branch=master"
 
 # SHA1-Hash when downloading from git
 SRCREV = "${AUTOREV}"
