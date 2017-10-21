@@ -4,6 +4,15 @@ rover layer.
 Please see the corresponding sections below for details.
 
 
+
+Patches
+=======
+
+Please submit any patches against the rover layer to the maintainer:
+
+Maintainer: Mustafa Ozcelikors <mozcelikors@gmail.com>
+
+
 Dependencies
 ============
 
@@ -16,18 +25,6 @@ This layer depends on:
   layers: meta
   branch: master
 
-  URI: git://git.yoctoproject.org/xxxx
-  layers: xxxx
-  branch: master
-
-
-Patches
-=======
-
-Please submit any patches against the rover layer to the
-xxxx mailing list (xxxx@zzzz.org) and cc: the maintainer:
-
-Maintainer: XXX YYYYYY <xxx.yyyyyy@zzzzz.com>
 
 
 Table of Contents
@@ -39,8 +36,6 @@ Table of Contents
 
 I. Adding the rover layer to your build
 =================================================
-
---- replace with specific instructions for the rover layer ---
 
 In order to use this layer, you need to make the build system aware of
 it.
@@ -57,12 +52,14 @@ other layers needed. e.g.:
     /path/to/yocto/meta-rover \
     "
 
+To make sure every package is whitelisted by the build system,
+
+In your build system under conf/local.conf
+Add
+
+   LICENSE_FLAGS_WHITELIST="commercial"
+
 
 II. Misc
 ========
 
---- replace with specific information about the rover layer ---
-
-In your build system under conf/local.conf
-Add 
-LICENSE_FLAGS_WHITELIST="commercial"
