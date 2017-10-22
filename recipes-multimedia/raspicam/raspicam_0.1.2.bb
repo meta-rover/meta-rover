@@ -28,7 +28,8 @@ RDEPENDS_${PN}-dev = ""
 RDEPENDS_${PN}-dbg = ""
 
 #Fetching from git repo, ${PV} is package version automatically extracted from filename
-SRC_URI = "git://github.com/6by9/raspicam-${PV}.git;protocol=https;branch=master"
+#SRC_URI = "git://github.com/6by9/raspicam-0.1.3.git;protocol=https;branch=master"
+SRC_URI = "git://github.com/cedricve/raspicam.git;protocol=https;branch=master"
 
 # SHA1-Hash when downloading from git
 SRCREV = "${AUTOREV}"
@@ -62,3 +63,5 @@ do_install() {
     #     cp -r ${B}/src/libraspicam_cv.so* ${D}${libdir}
     #fi
 }
+
+
