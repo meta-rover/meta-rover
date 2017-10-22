@@ -25,7 +25,15 @@ This layer depends on:
   layers: meta
   branch: master
 
+  URI: https://github.com/openembedded/meta-openembedded.git
+  layers: meta-python, meta-networking, meta-oe, meta-multimedia
 
+  URI: git://git.yoctoproject.org/meta-qt4
+  layers: meta-qt
+
+  URI: git://git.yoctoproject.org/meta-raspberrypi
+  layers: meta-raspberrypi
+  branch: master
 
 Table of Contents
 =================
@@ -46,11 +54,32 @@ location of the rover layer to bblayers.conf, along with any
 other layers needed. e.g.:
 
   BBLAYERS ?= " \
-    /path/to/yocto/meta \
-    /path/to/yocto/meta-poky \
-    /path/to/yocto/meta-yocto-bsp \
-    /path/to/yocto/meta-rover \
-    "
+    /home/mozcelikors-host/poky/meta \
+    /home/mozcelikors-host/poky/meta-poky \
+    /home/mozcelikors-host/poky/meta-yocto-bsp \
+    /home/mozcelikors-host/poky/meta-rover \
+    /home/mozcelikors-host/poky/meta-raspberrypi \
+    /home/mozcelikors-host/poky/meta-multimedia \
+    /home/mozcelikors-host/poky/meta-networking \
+    /home/mozcelikors-host/poky/meta-oe \
+    /home/mozcelikors-host/poky/meta-python \
+    /home/mozcelikors-host/poky/meta-qt4 \
+  "
+
+
+
+
+Example build sys / machine setup should be in conf/local.conf should be as follows:
+
+BB_VERSION        = "1.25.0"
+BUILD_SYS         = "x86_64-linux"
+NATIVELSBSTRING   = "Ubuntu-14.04"
+TARGET_SYS        = "arm-poky-linux-gnueabi"
+MACHINE           = "raspberrypi"
+DISTRO            = "poky"
+DISTRO_VERSION    = "2.3.2"
+TUNE_FEATURES     = "arm armv6 vfp"
+TARGET_FPU        = "vfp"
 
 To make sure every package is whitelisted by the build system,
 
