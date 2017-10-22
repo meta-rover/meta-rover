@@ -1,5 +1,5 @@
 #
-# Bitbake recipe for raspicam_0.1.3 module from https://github.com/6by9/raspicam-0.1.3
+# Bitbake recipe for raspicam_0.1.2 module
 # Recipe created by: M.Ozcelikors <mozcelikors@gmail.com>
 #
 
