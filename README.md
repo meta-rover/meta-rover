@@ -69,26 +69,49 @@ other layers needed. e.g.:
 
 
 
-Example build sys / machine setup should be in conf/local.conf should be as follows:
+Example build sys / machine setup should be in `conf/local.conf` should be as follows:
 
-BB_VERSION        = "1.25.0"
+`BB_VERSION        = "1.25.0"
+
 BUILD_SYS         = "x86_64-linux"
+
 NATIVELSBSTRING   = "Ubuntu-14.04"
+
 TARGET_SYS        = "arm-poky-linux-gnueabi"
+
 MACHINE           = "raspberrypi"
+
 DISTRO            = "poky"
+
 DISTRO_VERSION    = "2.3.2"
+
 TUNE_FEATURES     = "arm armv6 vfp"
-TARGET_FPU        = "vfp"
+
+TARGET_FPU        = "vfp"`
 
 To make sure every package is whitelisted by the build system,
 
 In your build system under conf/local.conf
 Add
 
-   LICENSE_FLAGS_WHITELIST="commercial"
+   `LICENSE_FLAGS_WHITELIST="commercial"`
 
 
-II. Misc
-========
+II. Image Creation
+===================
+
+In order to create a Raspberry Pi image,
+use our currently developed (experimental) image recipe that depends on rpi-test-image:
+
+`meta-rover/recipes-core/images/rover-extended-image.bb`
+
+You can use the extended features in this image recipe and add them to your own recipe to build a custom Rover image.
+
+To see the packages that will be build enter the following from your build root:
+
+`bitbake -g rover-extended-image && cat pn-buildlist`
+
+To create the image:
+
+`bitbake rover-extended-image`
 
