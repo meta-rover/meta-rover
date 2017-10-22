@@ -52,7 +52,7 @@ Assuming the rover layer exists at the top-level of your
 yocto build tree, you can add it to the build system by adding the
 location of the rover layer to bblayers.conf, along with any
 other layers needed. e.g.:
-
+```bitbake
   BBLAYERS ?= " \
     /home/mozcelikors-host/poky/meta \
     /home/mozcelikors-host/poky/meta-poky \
@@ -65,29 +65,23 @@ other layers needed. e.g.:
     /home/mozcelikors-host/poky/meta-python \
     /home/mozcelikors-host/poky/meta-qt4 \
   "
-
+```
 
 
 
 Example build sys / machine setup should be in `conf/local.conf` should be as follows:
 
-`BB_VERSION        = "1.25.0"
-
+```bitbake
+BB_VERSION        = "1.25.0"
 BUILD_SYS         = "x86_64-linux"
-
 NATIVELSBSTRING   = "Ubuntu-14.04"
-
 TARGET_SYS        = "arm-poky-linux-gnueabi"
-
 MACHINE           = "raspberrypi"
-
 DISTRO            = "poky"
-
 DISTRO_VERSION    = "2.3.2"
-
 TUNE_FEATURES     = "arm armv6 vfp"
-
-TARGET_FPU        = "vfp"`
+TARGET_FPU        = "vfp"
+```
 
 To make sure every package is whitelisted by the build system,
 
