@@ -8,10 +8,11 @@ Please see the corresponding sections below for details.
 Patches
 =======
 
-Please submit any patches against the rover layer to the maintainer:
+Please submit any patches against the rover layer to the maintainers:
 
-Maintainer: Mustafa Ozcelikors <mozcelikors@gmail.com>
-
+Maintainers: 
+Mustafa Ozcelikors <mozcelikors@gmail.com>
+Pedro Cuadra
 
 Dependencies
 ============
@@ -39,7 +40,7 @@ Table of Contents
 =================
 
   I. Adding the rover layer to your build
- II. Misc
+ II. Image creation for Raspberry Pi (Poky Distro)
 
 
 I. Adding the rover layer to your build
@@ -91,21 +92,21 @@ Add
    `LICENSE_FLAGS_WHITELIST="commercial"`
 
 
-II. Image Creation
-===================
+II. Image creation for Raspberry Pi (Poky Distro)
+=================================================
 
 In order to create a Raspberry Pi image,
 use our currently developed (experimental) image recipe that depends on rpi-test-image:
 
-`meta-rover/recipes-core/images/rover-extended-image.bb`
+`meta-rover/recipes-core/images/rover-rpi-image-reuse.bb`
 
 You can use the extended features in this image recipe and add them to your own recipe to build a custom Rover image.
 
 To see the packages that will be build enter the following from your build root:
 
-`bitbake -g rover-extended-image && cat pn-buildlist`
+`bitbake -g rover-rpi-image && cat pn-buildlist`
 
 To create the image:
 
-`bitbake rover-extended-image`
+`bitbake rover-rpi-image`
 
