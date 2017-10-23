@@ -28,8 +28,8 @@ This layer depends on:
   URI: https://github.com/openembedded/meta-openembedded.git
   layers: meta-python, meta-networking, meta-oe, meta-multimedia
 
-  URI: git://git.yoctoproject.org/meta-qt4
-  layers: meta-qt
+  URI: git://git.yoctoproject.org/meta-qt5
+  layers: meta-qt5
 
   URI: git://git.yoctoproject.org/meta-raspberrypi
   layers: meta-raspberrypi
@@ -63,7 +63,7 @@ other layers needed. e.g.:
     /home/mozcelikors-host/poky/meta-networking \
     /home/mozcelikors-host/poky/meta-oe \
     /home/mozcelikors-host/poky/meta-python \
-    /home/mozcelikors-host/poky/meta-qt4 \
+    /home/mozcelikors-host/poky/meta-qt5 \
   "
 ```
 
