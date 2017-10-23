@@ -5,4 +5,4 @@
 DESCRIPTION = "APP4MC-APPSTACLE Rover Extended Image Creation Recipe Append File"
 LICENSE = "MIT"
 
-IMAGE_INSTALL_append = " apache2 php opencv raspicam"
+IMAGE_INSTALL_append = " apache2 php opencv raspicam python-psutil"
