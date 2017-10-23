@@ -10,8 +10,10 @@ Patches
 
 Please submit any patches against the rover layer to the maintainers:
 
-Maintainers: 
+Maintainers:
+ 
 Mustafa Ozcelikors <mozcelikors@gmail.com>
+
 Pedro Cuadra
 
 Dependencies
@@ -19,12 +21,10 @@ Dependencies
 
 This layer depends on:
 
-  URI: git://git.openembedded.org/bitbake
+  ```
+  URI: git://git.yoctoproject.org/poky
   branch: master
-
-  URI: git://git.openembedded.org/openembedded-core
-  layers: meta
-  branch: master
+  revision: HEAD
 
   URI: https://github.com/openembedded/meta-openembedded.git
   layers: meta-python, meta-networking, meta-oe, meta-multimedia
@@ -35,6 +35,7 @@ This layer depends on:
   URI: git://git.yoctoproject.org/meta-raspberrypi
   layers: meta-raspberrypi
   branch: master
+  ```
 
 Table of Contents
 =================
