@@ -31,7 +31,7 @@ S = "${WORKDIR}/httpd-${PV}"
 inherit autotools update-rc.d pkgconfig systemd
 
 SYSTEMD_SERVICE_${PN} = "apache2.service"
-SYSTEMD_AUTO_ENABLE_${PN} = "disable"
+SYSTEMD_AUTO_ENABLE_${PN} = "enable"
 
 SSTATE_SCAN_FILES += "apxs config_vars.mk config.nice"
 
