@@ -1,6 +1,4 @@
-#
-# Rover Image For Raspberry Pi - without AGL 
-# Created by M.Ozcelikors <mozcelikors@gmail.com>
+# http://github.com/meta-rover/meta-rover
 
 DESCRIPTION = "APP4MC-APPSTACLE Rover Extended Image Creation Recipe for Raspberry Pi"
 LICENSE = "MIT"
