@@ -7,6 +7,8 @@ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 
 inherit cmake
 
+DEPENDS = "wiringPi i2c-tools jsoncpp python-psutil raspicam"
+
 SRCREV = "696d0959f60a25dcd3502b6c586fa67256c56f9d"
 PV = "1.1+gitr${SRCPV}"
 
