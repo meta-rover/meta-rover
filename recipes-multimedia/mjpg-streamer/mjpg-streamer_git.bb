@@ -1,9 +1,7 @@
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://mjpg-streamer-experimental/LICENSE;md5=751419260aa954499f7abaabaa882bbe" 
+LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe" 
 
-SRC_URI = ""
-
-# Patches
+SRC_URI = "git://github.com/jacksonliam/mjpg-streamer.git;protocol=https"
 
 # Modify these as desired
 PV = "1.0+git${SRCPV}"
@@ -13,5 +11,7 @@ inherit pkgconfig cmake
 
 DEPENDS = "raspicam libjpeg-turbo bcm-host mmal"
 
-OECMAKE_SOURCEPATH = "${S}/mjpg-streamer-experimental"
+#OECMAKE_SOURCEPATH = "${S}/mjpg-streamer-experimental"
+
+S = "${WORKDIR}/git/mjpg-streamer-experimental"
 
