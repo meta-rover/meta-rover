@@ -8,7 +8,7 @@ inherit cmake
 DEPENDS = "wiringPi i2c-tools jsoncpp python-psutil raspicam bluez5 mmal"
 
 # FIXME: Update once feathre/cmakelistfix is integrated into master
-SRCREV = "0d16c91f29ac5131b8202e7e5c82b340f2dae08e"
+SRCREV = "d1fdb82d3c14ea4aa55b3bdb06c34beb4c333d2d"
 PV = "1.1+gitr${SRCPV}"
 
 SRC_URI = "git://github.com/app4mc-rover/rover-app.git;branch=feature/cmakelistfix"
