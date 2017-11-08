@@ -54,6 +54,15 @@ do_compile() {
 do_install() {
   cd ${S}/../build/interface/vchiq_arm
   oe_runmake install DESTDIR=${D}
+  install -d ${D}/${includedir}/interface/vctypes
+  install ${S}/interface/vctypes/*.h ${D}/${includedir}/interface/vctypes
+  install -d ${D}/${includedir}/interface/vchi/connections
+  install ${S}/interface/vchi/*.h ${D}/${includedir}/interface/vchi
+  install ${S}/interface/vchi/connections/*.h ${D}/${includedir}/interface/vchi/connections
+  install -d ${D}/${includedir}/interface/vchi/message_drivers
+  install ${S}/interface/vchi/message_drivers/*.h ${D}/${includedir}/interface/vchi/message_drivers
+  install -d ${D}/${includedir}/vcinclude
+  install ${S}/vcinclude/*.h ${D}/${includedir}/vcinclude
 }
 
 # Shared libs from userland package  build aren't versioned, so we need

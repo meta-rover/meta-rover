@@ -7,10 +7,9 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=0448d6488ef8cc380632b1569ee6d196"
 
 PR = "r5"
 
-PROVIDES = "virtual/libgles2 \
-            virtual/egl"
+#RPROVIDES_${PN} += "libvchostif"
 
-RPROVIDES_${PN} += "libgles2 libgl"
+DEPENDS = "vmcs-host"
 
 COMPATIBLE_MACHINE = "raspberrypi"
 
@@ -53,16 +52,14 @@ EXTRA_OECMAKE_append_aarch64 = " -DARM64=ON "
 CFLAGS_append = " -fPIC"
 
 do_compile() {
-  oe_runmake vcos
+  oe_runmake bcm_host
 }
 
 do_install() {
-  cd ${S}/../build/interface/vcos
+  cd ${S}/../build/host_applications/linux/libs/bcm_host
   oe_runmake install DESTDIR=${D}
-  install -d ${D}/${includedir}/interface/vcos
-  install ${S}/interface/vcos/*.h ${D}/${includedir}/interface/vcos
-  install -d ${D}/${includedir}/interface/vcos/pthreads
-  install ${S}/interface/vcos/pthreads/*.h ${D}/${includedir}/interface/vcos/pthreads
+  install -d ${D}${includedir}
+  install ${S}/host_applications/linux/libs/bcm_host/include/bcm_host.h ${D}${includedir}/bcm_host.h 
 }
 
 # Shared libs from userland package  build aren't versioned, so we need
@@ -70,6 +67,8 @@ do_install() {
 # out of -dev package).
 FILES_SOLIBSDEV = ""
 INSANE_SKIP_${PN} += "dev-so"
+
+PACKAGES = "${PN} ${PN}-dev ${PN}-dbg"
 
 FILES_${PN} += " \
     ${libdir}/*.so \

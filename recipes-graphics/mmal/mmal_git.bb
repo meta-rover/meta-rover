@@ -58,6 +58,9 @@ do_compile() {
 do_install() {
   cd ${S}/../build/interface/mmal
   oe_runmake install DESTDIR=${D}
+  install -d ${D}/${includedir}/mmal/util
+  install ${S}/interface/mmal/*.h ${D}/${includedir}/mmal
+  install ${S}/interface/mmal/util/*.h ${D}/${includedir}/mmal/util
 }
 
 # Shared libs from userland package  build aren't versioned, so we need
