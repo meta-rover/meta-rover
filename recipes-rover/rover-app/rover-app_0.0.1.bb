@@ -1,7 +1,7 @@
 DESCRIPTION = "Rover Application"
 AUTHOR = "Mustafa Ozcelikors"
 LICENSE = "EPL-1.0"
-LIC_FILES_CHKSUM = "file://EPL-1.0;md5=eb8a703a05c268e751fdb962e863bfaf"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=b5d7f7156f7785ca2eb55d6cc1b4c118"
 
 inherit cmake
 
@@ -34,5 +34,4 @@ FILES_${PN}-dbg = "\
     ${libdir}/.debug"
 
 FILES_${PN}-dev = "\
-    ${includedir}" 
-
+    ${includedir}"
