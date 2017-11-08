@@ -1,0 +1,373 @@
+diff --git a/src/drivers/oled_drivers/bcm2835.c b/src/drivers/oled_drivers/bcm2835.c
+index 697f677..5f3ad60 100644
+--- a/src/drivers/oled_drivers/bcm2835.c
++++ b/src/drivers/oled_drivers/bcm2835.c
+@@ -7,7 +7,7 @@
+ // Author: Mike McCauley
+ // Copyright (C) 2011-2013 Mike McCauley
+ // $Id: bcm2835.c,v 1.10 2013/03/18 05:57:36 mikem Exp mikem $
+-// 
++//
+ // 03/17/2013 : Charles-Henri Hallard (http://hallard.me)
+ //              Modified Adding some fonctionnalities
+ //							Added millis() function
+@@ -19,7 +19,7 @@
+ 
+ 
+ #include "bcm2835.h"
+-#include <linux/i2c-dev.h> 
++#include <linux/i2c-dev-user.h> 
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <fcntl.h>
+@@ -76,13 +76,13 @@ void  bcm2835_set_debug(uint8_t d)
+ 
+ 
+ // Get raspberry PI model version
+-int bcm2835_get_pi_version( void ) 
+-{ 
++int bcm2835_get_pi_version( void )
++{
+ 	int rev = 0;
+ 	char buff[512];
+ 	char * p;
+ 	char * pend;
+-	
++
+ 	FILE * fd ;
+ 
+ 	// do some clean up
+@@ -94,12 +94,12 @@ int bcm2835_get_pi_version( void )
+ 	if( fd )
+ 	{
+ 		//printf("File opened successfully through fopen()\n");
+-		
++
+ 		// parse each line until we the end or we find the good one
+-		while( fgets(buff, sizeof(buff), fd) != NULL && rev ==0 ) 
++		while( fgets(buff, sizeof(buff), fd) != NULL && rev ==0 )
+ 		{
+-			// search 
+-			if( (strstr(buff, "Revision" )) != NULL )  
++			// search
++			if( (strstr(buff, "Revision" )) != NULL )
+ 			{
+ 				// point to the separator ":" format is has follow
+ 				// Revision        : 000f
+@@ -111,12 +111,12 @@ int bcm2835_get_pi_version( void )
+ 						// Revision Version is in hex format so put 0x before the number
+ 						*p   = 'x';
+ 						*--p = '0';
+-						
++
+ 						// convert to number
+ 						rev = strtol(p, &pend, 16);
+-						
++
+ 						//printf("rev=%d 0x%04x\n", rev, rev);
+-						
++
+ 						// not Okay ?
+ 						if ( !*pend )
+ 						{
+@@ -133,14 +133,14 @@ int bcm2835_get_pi_version( void )
+ 		}
+ 
+ 		// Close the file.
+-		if(fd) 
++		if(fd)
+ 		{
+ 			fclose(fd);
+ 		}
+ 	}
+ 
+ 	return rev;
+-} 
++}
+ 
+ 
+ 
+@@ -437,7 +437,7 @@ void bcm2835_gpio_set_pad(uint8_t group, uint32_t control)
+ void bcm2835_delay(unsigned int millis)
+ {
+     struct timespec sleeper;
+-    
++
+     sleeper.tv_sec  = (time_t)(millis / 1000);
+     sleeper.tv_nsec = (long)(millis % 1000) * 1000000;
+     nanosleep(&sleeper, NULL);
+@@ -448,18 +448,18 @@ void bcm2835_delayMicroseconds(uint64_t micros)
+ {
+     struct timespec t1;
+     uint64_t        start;
+-	
++
+     // Calling nanosleep() takes at least 100-200 us, so use it for
+     // long waits and use a busy wait on the System Timer for the rest.
+     start =  bcm2835_st_read();
+-    
++
+     if (micros > 450)
+     {
+ 	t1.tv_sec = 0;
+ 	t1.tv_nsec = 1000 * (long)(micros - 200);
+ 	nanosleep(&t1, NULL);
+-    }    
+-  
++    }
++
+     bcm2835_st_delay(start, micros);
+ }
+ 
+@@ -467,12 +467,12 @@ void bcm2835_delayMicroseconds(uint64_t micros)
+ unsigned int bcm2835_millis(void)
+ {
+ 	struct timeval now;
+-	unsigned long long ms;    
+-	
++	unsigned long long ms;
++
+ 	gettimeofday(&now, NULL);
+-	
++
+ 	ms = (now.tv_sec * 1000000 + now.tv_usec) / 1000 ;
+-	
++
+ 	return ((uint32_t) (ms - epoch ));
+ }
+ 
+@@ -537,11 +537,11 @@ void bcm2835_spi_begin(uint8_t cs)
+     volatile uint32_t* paddr = bcm2835_spi0 + BCM2835_SPI0_CS/4;
+ 
+     // Set the SPI0 pins to the Alt 0 function to enable SPI0 access on them
+-		// except if we need custom Chip Select Pin 
++		// except if we need custom Chip Select Pin
+ 		// printf("bcm2835_spi_begin -> spi_custom_cs = %d \n",cs );
+-		
+-		// Do we need custom chip select control or 
+-		// drive CE1 manually (because CE1 does not work with hardware) 
++
++		// Do we need custom chip select control or
++		// drive CE1 manually (because CE1 does not work with hardware)
+ 		if ( cs > BCM2835_SPI_CS_NONE || cs == BCM2835_SPI_CS1 )
+ 		{
+ 			// indicate we will use a custom GPIO port
+@@ -552,9 +552,9 @@ void bcm2835_spi_begin(uint8_t cs)
+ 			{
+ 				// Dirty Hack CE1 in now custom Chip Select GPIO 26
+ 				// the real CE1 pin
+-				spi_custom_cs = RPI_GPIO_P1_26 ; 
+-				
+-				bcm2835_gpio_fsel(spi_custom_cs, BCM2835_GPIO_FSEL_OUTP); 
++				spi_custom_cs = RPI_GPIO_P1_26 ;
++
++				bcm2835_gpio_fsel(spi_custom_cs, BCM2835_GPIO_FSEL_OUTP);
+ 				bcm2835_gpio_write(spi_custom_cs, HIGH);
+ 			}
+ 
+@@ -566,17 +566,17 @@ void bcm2835_spi_begin(uint8_t cs)
+ 		{
+ 			// Just in case
+ 			spi_custom_cs = 0 ;
+-			
++
+ 			// Mask in the CS bits of CS
+ 			bcm2835_peri_set_bits(paddr, cs, BCM2835_SPI0_CS_CS);
+-		}		
+-		
+-		// Now we can drive the I/O as asked 
++		}
++
++		// Now we can drive the I/O as asked
+ 		if (spi_custom_cs == 0)
+ 		{
+ 			// Not custom CS, so hardware driven
+-			bcm2835_gpio_fsel(RPI_GPIO_P1_24, BCM2835_GPIO_FSEL_ALT0); // CE0 
+-			bcm2835_gpio_fsel(RPI_GPIO_P1_26, BCM2835_GPIO_FSEL_ALT0); // CE1 
++			bcm2835_gpio_fsel(RPI_GPIO_P1_24, BCM2835_GPIO_FSEL_ALT0); // CE0
++			bcm2835_gpio_fsel(RPI_GPIO_P1_26, BCM2835_GPIO_FSEL_ALT0); // CE1
+ 		}
+ 		else
+ 		{
+@@ -584,21 +584,21 @@ void bcm2835_spi_begin(uint8_t cs)
+ 			bcm2835_gpio_fsel(spi_custom_cs, BCM2835_GPIO_FSEL_OUTP); // Custom GPIO
+ 			bcm2835_gpio_write(spi_custom_cs, HIGH);
+ 		}
+-		
++
+ 		// Classic pin, hardware driven
+     bcm2835_gpio_fsel(RPI_GPIO_P1_21, BCM2835_GPIO_FSEL_ALT0); // MISO
+     bcm2835_gpio_fsel(RPI_GPIO_P1_19, BCM2835_GPIO_FSEL_ALT0); // MOSI
+     bcm2835_gpio_fsel(RPI_GPIO_P1_23, BCM2835_GPIO_FSEL_ALT0); // CLK
+-    
++
+     // Set the SPI CS register to the some sensible defaults
+     bcm2835_peri_write(paddr, 0); // All 0s
+-    
++
+     // Clear TX and RX fifos
+     bcm2835_peri_write_nb(paddr, BCM2835_SPI0_CS_CLEAR);
+ }
+ 
+ void bcm2835_spi_end(void)
+-{  
++{
+     // Set all the SPI0 pins back to input
+ 		if (spi_custom_cs == 0)
+ 		{
+@@ -662,7 +662,7 @@ uint8_t bcm2835_spi_transfer(uint8_t value)
+ 
+     // This is Polled transfer as per section 10.6.1
+     // BUG ALERT: what happens if we get interupted in this section, and someone else
+-    // accesses a different peripheral? 
++    // accesses a different peripheral?
+     // Clear TX and RX fifos
+     bcm2835_peri_set_bits(paddr, BCM2835_SPI0_CS_CLEAR, BCM2835_SPI0_CS_CLEAR);
+ 
+@@ -703,7 +703,7 @@ void bcm2835_spi_transfernb(char* tbuf, char* rbuf, uint32_t len)
+ 
+     // This is Polled transfer as per section 10.6.1
+     // BUG ALERT: what happens if we get interupted in this section, and someone else
+-    // accesses a different peripheral? 
++    // accesses a different peripheral?
+ 
+     // Clear TX and RX fifos
+     bcm2835_peri_set_bits(paddr, BCM2835_SPI0_CS_CLEAR, BCM2835_SPI0_CS_CLEAR);
+@@ -737,7 +737,7 @@ void bcm2835_spi_transfernb(char* tbuf, char* rbuf, uint32_t len)
+ 
+ 		// Custom chip select HIGH
+ 		bcm2835_spi_setChipSelect(HIGH);
+-	
++
+ }
+ 
+ // Writes an number of bytes to SPI
+@@ -802,7 +802,7 @@ void bcm2835_spi_setChipSelectPolarity(uint8_t cs, uint8_t active)
+ 		if (cs <= BCM2835_SPI_CS_NONE)
+ 		{
+ 			uint8_t shift = 21 + cs;
+-			
++
+ 			// Mask in the appropriate CSPOLn bit
+ 			bcm2835_peri_set_bits(paddr, active << shift, 1 << shift);
+ 		}
+@@ -814,15 +814,15 @@ int bcm2835_i2c_begin(void)
+ 
+ 	if ((fd = open (bcm2835_get_pi_version() == 1 ? "/dev/i2c-0":"/dev/i2c-1" , O_RDWR)) < 0)
+ 		return fd;
+-		
++
+ 	// Set i2c descriptor
+ 	i2c_fd = fd;
+ 
+ 	return i2c_fd ;
+-		
++
+ }
+ 
+-void bcm2835_i2c_end(void) 
++void bcm2835_i2c_end(void)
+ {
+ 	// close i2c bus
+ 	if ( i2c_fd )
+@@ -839,19 +839,19 @@ int bcm2835_i2c_setSlaveAddress(uint8_t addr)
+ 
+ 	// Set I2C Device Address
+ 	return (ioctl (i2c_fd, I2C_SLAVE, addr) );
+-			
++
+ }
+ 
+ // set I2C clock divider by means of a baudrate number
+ void bcm2835_i2c_set_baudrate(uint32_t baudrate)
+ {
+   volatile uint32_t* paddr = bcm2835_bsc1 + BCM2835_BSC_DIV/4;
+-	
++
+ 	uint32_t divider;
+-	
++
+ 	// use 0xFFFE mask to limit a max value and round down any odd number
+ 	divider = (BCM2835_CORE_CLK_HZ / baudrate) & 0xFFFE;
+-	
++
+   bcm2835_peri_write(paddr, divider);
+ }
+ 
+@@ -859,7 +859,7 @@ void bcm2835_i2c_set_baudrate(uint32_t baudrate)
+ int bcm2835_i2c_write(const char * buf, uint32_t len)
+ {
+ 	int reason = -1	;
+-	
++
+ 	if (!i2c_fd)
+ 		return (-1);
+ 
+@@ -871,9 +871,9 @@ int bcm2835_i2c_write(const char * buf, uint32_t len)
+ 	else if (len == 3)
+ 		reason = i2c_smbus_write_word_data(i2c_fd, buf[0], (buf[2]<<8) | buf[1] );
+ 	// Write bulk data
+-	else 
++	else
+ 		reason = i2c_smbus_write_i2c_block_data(i2c_fd, buf[0], len-1, (const __u8 *) &buf[1]);
+-		
++
+ 	usleep(1);
+ 
+ 	return ( reason );
+@@ -941,8 +941,8 @@ static void unmapmem(void **pmem, size_t size)
+ int bcm2835_init(void)
+ {
+ 	struct timeval tv ;
+-	
+-    if (debug) 
++
++    if (debug)
+     {
+ 	bcm2835_pads = (uint32_t*)BCM2835_GPIO_PADS;
+ 	bcm2835_clk = (uint32_t*)BCM2835_CLOCK_BASE;
+@@ -957,13 +957,13 @@ int bcm2835_init(void)
+     int memfd = -1;
+     int ok = 0;
+     // Open the master /dev/memory device
+-    if ((memfd = open("/dev/mem", O_RDWR | O_SYNC) ) < 0) 
++    if ((memfd = open("/dev/mem", O_RDWR | O_SYNC) ) < 0)
+     {
+ 	fprintf(stderr, "bcm2835_init: Unable to open /dev/mem: %s\n",
+ 		strerror(errno)) ;
+ 	goto exit;
+     }
+-	
++
+     // GPIO:
+     bcm2835_gpio = mapmem("gpio", BCM2835_BLOCK_SIZE, memfd, BCM2835_GPIO_BASE);
+     if (bcm2835_gpio == MAP_FAILED) goto exit;
+@@ -975,10 +975,10 @@ int bcm2835_init(void)
+     // Clock control (needed for PWM)
+     bcm2835_clk = mapmem("clk", BCM2835_BLOCK_SIZE, memfd, BCM2835_CLOCK_BASE);
+     if (bcm2835_clk == MAP_FAILED) goto exit;
+-    
++
+     bcm2835_pads = mapmem("pads", BCM2835_BLOCK_SIZE, memfd, BCM2835_GPIO_PADS);
+     if (bcm2835_pads == MAP_FAILED) goto exit;
+-    
++
+     bcm2835_spi0 = mapmem("spi0", BCM2835_BLOCK_SIZE, memfd, BCM2835_SPI0_BASE);
+     if (bcm2835_spi0 == MAP_FAILED) goto exit;
+ 
+@@ -1001,7 +1001,7 @@ exit:
+ 
+     if (!ok)
+ 	bcm2835_close();
+-	
++
+   gettimeofday (&tv, NULL) ;
+ 	epoch = (tv.tv_sec * 1000000 + tv.tv_usec) / 1000 ;
+ 
+@@ -1020,4 +1020,4 @@ int bcm2835_close(void)
+     unmapmem((void**) &bcm2835_bsc1, BCM2835_BLOCK_SIZE);
+     unmapmem((void**) &bcm2835_st,   BCM2835_BLOCK_SIZE);
+     return 1; // Success
+-}    
++}
+
