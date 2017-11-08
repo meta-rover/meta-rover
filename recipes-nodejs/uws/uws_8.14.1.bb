@@ -23,6 +23,8 @@ INSANE_SKIP_${PN} = "already-stripped"
 
 inherit npm
 
+DEPENDS = "nodejs"
+
 # Must be set after inherit npm since that itself sets S
 S = "${WORKDIR}/npmpkg"
 LICENSE_${PN} = "Zlib"

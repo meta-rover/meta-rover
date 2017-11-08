@@ -24,6 +24,8 @@ NPM_LOCKDOWN := "${THISDIR}/${PN}/lockdown.json"
 
 inherit npm
 
+DEPENDS = "nodejs"
+
 # Must be set after inherit npm since that itself sets S
 S = "${WORKDIR}/npmpkg"
 LICENSE_${PN}-after = "MIT"

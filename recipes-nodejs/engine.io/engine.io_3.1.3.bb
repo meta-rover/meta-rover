@@ -2,7 +2,7 @@
 # This is the basis of a recipe and may need further editing in order to be fully functional.
 # (Feel free to remove these comments when editing.)
 
-DEPENDS = "cookie debug accepts uws engine.io-parser"
+DEPENDS = "cookie debug accepts uws engine.io-parser nodejs"
 
 SUMMARY = "The realtime engine behind Socket.IO. Provides the foundation of a bidirectional connection between client and server"
 HOMEPAGE = "https://github.com/socketio/engine.io"
