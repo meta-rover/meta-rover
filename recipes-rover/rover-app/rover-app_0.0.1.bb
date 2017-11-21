@@ -5,13 +5,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b5d7f7156f7785ca2eb55d6cc1b4c118"
 
 inherit cmake
 
-DEPENDS = "wiringPi i2c-tools jsoncpp python-psutil raspicam bluez5 mmal"
+RDEPENDS_${PN} = "python-psutil bluez5 i2c-tools wiringPi jsoncpp raspicam mmal"
 
-# FIXME: Update once feathre/cmakelistfix is integrated into master
-SRCREV = "d1fdb82d3c14ea4aa55b3bdb06c34beb4c333d2d"
+SRCREV = "e4639dc78ce0f4d1dd98417c765af776b37a99f7"
 PV = "1.1+gitr${SRCPV}"
 
-SRC_URI = "git://github.com/app4mc-rover/rover-app.git;branch=feature/cmakelistfix"
+SRC_URI = "git://github.com/app4mc-rover/rover-app.git"
 
 # Patches
 SRC_URI += "file://i2c.patch"

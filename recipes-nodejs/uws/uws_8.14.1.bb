@@ -19,11 +19,14 @@ SRC_URI = "npm://registry.npmjs.org;name=uws;version=${PV}"
 NPM_SHRINKWRAP := "${THISDIR}/${PN}/npm-shrinkwrap.json"
 NPM_LOCKDOWN := "${THISDIR}/${PN}/lockdown.json"
 
+TARGET_CC_ARCH += "${LDFLAGS}"
+
 INSANE_SKIP_${PN} = "already-stripped"
 
 inherit npm
 
 DEPENDS = "nodejs"
+RDEPENDS_${PN} = "uwebsockets"
 
 # Must be set after inherit npm since that itself sets S
 S = "${WORKDIR}/npmpkg"
