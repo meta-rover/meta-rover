@@ -16,7 +16,7 @@ SRCREV = "c3341b3067d0a6238bda090e5395b6162e3df4df"
 S = "${WORKDIR}/git"
 
 #TODO Add streamer dependency here
-RDEPENDS_${PN} = "nodejs net connect serve-static http libjpeg-turbo"
+RDEPENDS_${PN} = "nodejs net connect serve-static http libjpeg-turbo nodejs-npm socket.io"
 DEPENDS = "net connect serve-static http socket.io libjpeg-turbo"
 
 do_install () {
