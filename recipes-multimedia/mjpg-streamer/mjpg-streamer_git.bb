@@ -4,40 +4,27 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
 
 PV = "0.4+git${SRCPV}"
-SRCREV = "5f6adeefa0d5a78833cc809f2bfa76131f2b9ff8"
+SRCREV = "c1ecfaf7c5cb958cdfd251bdaa9824c3e798f890"
 SRC_URI = "git://github.com/jacksonliam/mjpg-streamer.git;protocol=https \
-           file://0001-Makefile-don-t-overwrite-C-LDFLAGS.patch;striplevel=2 \
           "
 
 DEPENDS = "libgphoto2 v4l-utils"
 
-INSANE_SKIP_${PN} = " ldflags"
-
 S = "${WORKDIR}/git/mjpg-streamer-experimental"
+inherit cmake
 
-CFLAGS =+ "-DLINUX -D_GNU_SOURCE "
+ASNEEDED = ""
 
-do_configure() {
-    # disable some stuff
-    sed -i -e '/PLUGINS += input_raspicam.so/d' ${S}/Makefile
-    sed -i -e 's/# PLUGINS += input_ptp2.so/PLUGINS += input_ptp2.so/' ${S}/Makefile
-}
+EXTRA_OECMAKE = "-DCMAKE_BUILD_TYPE=Release -DCMAKE_EXE_LINKER_FLAGS='-Wl,--no-as-needed' \
+                 -DVMCS_INSTALL_PREFIX=${exec_prefix} \
+"
+
+EXTRA_OECMAKE_append_aarch64 = " -DARM64=ON "
+
+CFLAGS_append = " -fPIC"
 
 EXTRA_OEMAKE = "USE_LIBV4L2=1"
 
-# oe_runmake seems to reset MAKEFLAGS, so just call plain make
-do_compile() {
-    make -e ${EXTRA_OEMAKE}
-}
-
-do_install() {
-    install -d ${D}${bindir}
-    install -d ${D}${libdir}
-
-    oe_runmake install DESTDIR=${D}${prefix}
-
-    install -d ${D}${datadir}/mjpg-streamer/
-    mv ${D}${prefix}/www ${D}${datadir}/mjpg-streamer/
-}
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 FILES_${PN} += "${libdir}/*.so"

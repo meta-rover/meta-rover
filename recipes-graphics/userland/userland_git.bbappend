@@ -1,3 +1,6 @@
+
+PROVIDES += " vc-graphics"
+
 do_install_append() {
 	rm ${D}${libdir}/libGLESv2.so*
 	rm ${D}${libdir}/libEGL.so*

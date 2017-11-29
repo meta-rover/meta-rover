@@ -12,7 +12,8 @@ RDEPENDS_${PN} = "python-psutil bluez5 i2c-tools wiringPi jsoncpp raspicam userl
 SRCREV = "e4639dc78ce0f4d1dd98417c765af776b37a99f7"
 PV = "1.1+gitr${SRCPV}"
 
-SRC_URI = "git://github.com/app4mc-rover/rover-app.git"
+SRC_URI = "git://github.com/app4mc-rover/rover-app.git \
+           file://rover-i2c.conf"
 
 # Patches
 SRC_URI += "file://i2c.patch"
