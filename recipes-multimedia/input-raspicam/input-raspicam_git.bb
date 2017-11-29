@@ -1,9 +1,9 @@
-SUMMARY = "MJPG-streamer takes JPGs from Linux-UVC compatible webcams, filesystem or other input plugins and streams them as M-JPEG via HTTP to webbrowsers, VLC and other software. It is the successor of uvc-streamer, a Linux-UVC streaming application with Pan/Tilt"
+SUMMARY = "Input raspicam MJPG-streamer plugin"
 
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
+LIC_FILES_CHKSUM = "file://mjpg-streamer-experimental/LICENSE;md5=751419260aa954499f7abaabaa882bbe"
 
-INSANE_SKIP_${PN} = " license-checksum"
+#INSANE_SKIP_${PN} = " license-checksum"
 
 inherit cmake
 
@@ -14,6 +14,8 @@ SRC_URI = "git://github.com/jacksonliam/mjpg-streamer.git;protocol=https \
           "
 
 DEPENDS = "mjpg-streamer"
+
+RDEPENDS_${PN} = "vc-graphics"
 
 S = "${WORKDIR}/git"
 
