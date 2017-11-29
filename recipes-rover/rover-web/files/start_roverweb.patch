@@ -1,0 +1,19 @@
+diff --git a/scripts/bash/setup/start_roverweb.sh b/scripts/bash/setup/start_roverweb.sh
+index a9bf588..a2d5746 100644
+--- a/scripts/bash/setup/start_roverweb.sh
++++ b/scripts/bash/setup/start_roverweb.sh
+@@ -1 +1,14 @@
+ #!/bin/bash
++
++ROVERWEB_INSTALL_PATH="/opt/rover-web"
++NODEJS_SERVER_PATH="${ROVERWEB_INSTALL_PATH}/scripts/nodejs"
++UPDATE_IP_SCRIPT="${ROVERWEB_INSTALL_PATH}/scripts/bash/setup/update_ip.sh"
++
++# Update IP of all htmls
++
++bash ${UPDATE_IP_SCRIPT} "${ROVERWEB_INSTALL_PATH}/roverweb.html"
++bash ${UPDATE_IP_SCRIPT} "${ROVERWEB_INSTALL_PATH}/sensordata.html"
++bash ${UPDATE_IP_SCRIPT} "${ROVERWEB_INSTALL_PATH}/utildata.html"
++
++cd ${NODEJS_SERVER_PATH}
++node start_roverweb.js

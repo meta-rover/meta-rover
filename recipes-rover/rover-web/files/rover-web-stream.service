@@ -1,0 +1,11 @@
+[Unit]
+Description = Rover Web Video Streaming
+After = network.target
+
+[Service]
+WorkingDirectory = /opt/rover-web/scripts/bash
+ExecStart = /bin/bash /opt/rover-web/scripts/bash/camera_stream/start_camera_stream.sh
+
+[Install]
+WantedBy = multi-user.target
+

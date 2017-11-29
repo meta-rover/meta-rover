@@ -1,0 +1,13 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 01f6d58..fc336b6 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -14,7 +14,7 @@ project (roverapp)
+ 
+ # Required packages
+ find_package (OpenCV REQUIRED)
+-find_package (raspicam REQUIRED)
++#find_package (raspicam REQUIRED)
+ find_package (Threads)
+ 
+ #Where to put binary files after "make"

@@ -35,6 +35,7 @@ NPM_LOCKDOWN := "${THISDIR}/${PN}/lockdown.json"
 inherit npm
 
 DEPENDS = "nodejs"
+RDEPENDS_${PN} = "nodejs nodejs-npm"
 
 # Must be set after inherit npm since that itself sets S
 S = "${WORKDIR}/npmpkg"

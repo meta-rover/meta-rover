@@ -5,7 +5,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b5d7f7156f7785ca2eb55d6cc1b4c118"
 
 inherit cmake
 
-RDEPENDS_${PN} = "python-psutil bluez5 i2c-tools wiringPi jsoncpp raspicam mmal"
+DEPENDS = "bluez5 i2c-tools wiringPi jsoncpp raspicam"
+
+RDEPENDS_${PN} = "python-psutil bluez5 i2c-tools wiringPi jsoncpp raspicam userland"
 
 SRCREV = "e4639dc78ce0f4d1dd98417c765af776b37a99f7"
 PV = "1.1+gitr${SRCPV}"

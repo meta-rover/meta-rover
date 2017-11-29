@@ -15,7 +15,7 @@ PR = "r0"
 
 # If your build system does not have opencv recipe, then you can test still by commenting below line
 # The following is required for this recipe to be cross-compiled.
-DEPENDS = "opencv"
+DEPENDS = "opencv userland"
 PROVIDES = "raspicam"
 
 # For do_package
@@ -26,6 +26,7 @@ FILES_${PN} += " ${libdir}/*"
 RDEPENDS_${PN}-staticdev = ""
 RDEPENDS_${PN}-dev = ""
 RDEPENDS_${PN}-dbg = ""
+RDEPENDS_${PN} = "userland"
 
 #Fetching from git repo, ${PV} is package version automatically extracted from filename
 #SRC_URI = "git://github.com/6by9/raspicam-0.1.3.git;protocol=https;branch=master"
