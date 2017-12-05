@@ -9,6 +9,8 @@ SRCREV = "b0a60c3302973ca1878d149d61f2f612c8f27fac"
 
 S = "${WORKDIR}/git"
 
+DEPENDS = "glibc"
+
 SRC_URI = "git://git.drogon.net/wiringPi \
            file://0001-Add-initial-cross-compile-support.patch \
            file://0001-include-asm-ioctl.h-directly-for-_IOC_SIZEBITS.patch \
@@ -31,4 +33,33 @@ do_install() {
     oe_runmake -C devLib install
     oe_runmake -C wiringPi install
     oe_runmake -C gpio install
+
+    rm ${D}${libdir}/libwiringPi.so. 
+    rm ${D}${libdir}/libwiringPiDev.so.
+
+    install -m 0644 ${S}/wiringPi/libwiringPi.so ${D}${libdir}/libwiringPi.so
+    install -m 0644 ${S}/devLib/libwiringPiDev.so ${D}${libdir}/libwiringPiDev.so
 }
+
+PACKAGES = "${PN} ${PN}-dev ${PN}-dbg"
+
+FILES_${PN} = "\
+    /usr/bin \
+    ${bindir}/* \
+    ${libdir}/lib*.so \
+    ${libdir}/lib*.so* \
+    /usr/share
+    ${libdir}/*.a"
+
+FILES_${PN}-dbg = "\
+    ${bindir}/.debug \
+    ${exec_prefix}/src/debug \
+    ${libdir}/.debug"
+
+FILES_${PN}-dev = "\
+    ${bindir}/* \
+    ${libdir}/lib*.so \
+    ${libdir}/lib*.so* \
+    ${libdir}/*.a \
+    ${includedir}"
+

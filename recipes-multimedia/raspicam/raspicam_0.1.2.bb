@@ -24,7 +24,7 @@ FILES_${PN} += " ${libdir}/*"
 
 # Runtime dependencies of created packages
 RDEPENDS_${PN}-staticdev = ""
-RDEPENDS_${PN}-dev = ""
+RDEPENDS_${PN}-dev = "glog-dev"
 RDEPENDS_${PN}-dbg = ""
 RDEPENDS_${PN} = "userland"
 
@@ -58,7 +58,7 @@ do_install() {
     # If we chose to install manually here, without packing concerns:
     #mkdir -p ${D}${libdir}
     #cp -r ${B}/src/libraspicam.so* ${D}${libdir}
-    
+	    
     # If OpenCV library is also compiled, install it too
     #if [ -f "${B}/src/libraspicam_cv.so"]; then
     #     cp -r ${B}/src/libraspicam_cv.so* ${D}${libdir}

@@ -5,18 +5,16 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b5d7f7156f7785ca2eb55d6cc1b4c118"
 
 inherit cmake
 
-DEPENDS = "bluez5 i2c-tools wiringPi jsoncpp raspicam"
+DEPENDS = "bluez5 i2c-tools wiringPi jsoncpp"
 
-RDEPENDS_${PN} = "python-psutil bluez5 i2c-tools wiringPi jsoncpp raspicam userland"
+RDEPENDS_${PN} = "python-psutil bluez5 i2c-tools wiringPi jsoncpp userland"
 
-SRCREV = "e4639dc78ce0f4d1dd98417c765af776b37a99f7"
+SRCREV = "18580b554eb369d149d085d6da9f3516dd5f9cf1"
 PV = "1.1+gitr${SRCPV}"
 
 SRC_URI = "git://github.com/app4mc-rover/rover-app.git \
-           file://rover-i2c.conf"
-
-# Patches
-SRC_URI += "file://i2c.patch"
+           file://rover-i2c.conf \
+           file://0001-Fix-Compilation-Errors.patch"
 
 S = "${WORKDIR}/git"
 

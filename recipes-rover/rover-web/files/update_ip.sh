@@ -1,11 +1,11 @@
 #!/bin/bash
 
-TEST_NET=`ip addr show dev eth0 | grep inet | grep -v "127.0.0"`
+TEST_NET=0
 
-while [ -z "${TEST_NET}" ]; do
+while [[ ${TEST_NET} == 0 ]]; do
   echo "Waiting for network..."
   sleep 1
-  TEST_NET=`ip addr show dev eth0 | grep inet | grep -v "127.0.0"`
+  TEST_NET=`ping -c1 8.8.8.8 | grep ttl | wc -l`
 done
 
 MY_IP=`hostname -i`
