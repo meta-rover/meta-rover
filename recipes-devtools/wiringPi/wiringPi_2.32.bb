@@ -48,7 +48,7 @@ FILES_${PN} = "\
     ${bindir}/* \
     ${libdir}/lib*.so \
     ${libdir}/lib*.so* \
-    /usr/share
+    /usr/share \
     ${libdir}/*.a"
 
 FILES_${PN}-dbg = "\
