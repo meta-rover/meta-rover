@@ -3,22 +3,28 @@ AUTHOR = "Mustafa Ozcelikors"
 LICENSE = "EPL-1.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b5d7f7156f7785ca2eb55d6cc1b4c118"
 
-inherit cmake
+inherit cmake systemd
 
 DEPENDS = "bluez5 i2c-tools wiringPi jsoncpp"
 
-RDEPENDS_${PN} = "python-psutil bluez5 i2c-tools wiringPi jsoncpp userland"
+RDEPENDS_${PN} = "python-psutil bluez5 i2c-tools wiringPi jsoncpp userland paho-mqtt-c"
 
 SRCREV = "18580b554eb369d149d085d6da9f3516dd5f9cf1"
 PV = "1.1+gitr${SRCPV}"
 
 SRC_URI = "git://github.com/app4mc-rover/rover-app.git \
            file://rover-i2c.conf \
-           file://0001-Fix-Compilation-Errors.patch"
+           file://rover-app.service \
+           file://0001-Fix-Compilation-Errors.patch \
+           file://0002-Fix-Coreutil-issue.patch"
 
 S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE += "-Dpkg_config_libdir=${libdir} -DCMAKE_BUILD_TYPE=Release"
+
+# Add services
+SYSTEMD_SERVICE_${PN} = "rover-app.service"
+SYSTEMD_PACKAGES = "${PN}"
 
 PACKAGES = "${PN} ${PN}-dbg ${PN}-dev"
 

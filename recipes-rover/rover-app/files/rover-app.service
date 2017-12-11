@@ -1,0 +1,9 @@
+[Unit]
+Description = Rover APP
+After = network-online.target
+
+[Service]
+ExecStart = /usr/bin/roverapp
+
+[Install]
+WantedBy = multi-user.target
