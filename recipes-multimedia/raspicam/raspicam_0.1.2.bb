@@ -19,50 +19,26 @@ DEPENDS = "opencv userland"
 PROVIDES = "raspicam"
 
 # For do_package
-PACKAGES = "${PN} ${PN}-dev ${PN}-dbg ${PN}-staticdev"
-FILES_${PN} += " ${libdir}/*"
+PACKAGES = "${PN} ${PN}-dev ${PN}-dbg"
+
+FILES_${PN} += " \
+	${libdir}/lib*so.* \
+	${libdir}/cmake/*"
+
+FILES_${PN}-dev += " ${libdir}/lib*so"
 
 # Runtime dependencies of created packages
-RDEPENDS_${PN}-staticdev = ""
 RDEPENDS_${PN}-dev = "glog-dev"
 RDEPENDS_${PN}-dbg = ""
-RDEPENDS_${PN} = "userland"
 
 #Fetching from git repo, ${PV} is package version automatically extracted from filename
 #SRC_URI = "git://github.com/6by9/raspicam-0.1.3.git;protocol=https;branch=master"
 SRC_URI = "git://github.com/cedricve/raspicam.git;protocol=https;branch=master"
 
 # SHA1-Hash when downloading from git
-SRCREV = "${AUTOREV}"
+SRCREV = "b585d1e6c42118dfcf237ffa148fd7fbd36a59f5"
 
 # This should be correct for git-based fetching
 S = "${WORKDIR}/git" 
 
 inherit pkgconfig cmake
-
-do_install() {
-    # Installing libraries
-    # Create directory
-    install -d ${D}${libdir}
-    # Copy library
-    install -m 0755 ${B}/src/libraspicam.so* ${D}${libdir}
-    
-    # If raspicam is compiled with opencv
-    if [ -f "${B}/src/libraspicam_cv.so"]; then
-        install -m 0755 ${B}/src/libraspicam_cv.so* ${D}${libdir}
-    fi
-
-    # At local.conf be sure to add library as
-    # IMAGE_INSTALL_append = "raspicam-staticdev"
-
-    # If we chose to install manually here, without packing concerns:
-    #mkdir -p ${D}${libdir}
-    #cp -r ${B}/src/libraspicam.so* ${D}${libdir}
-	    
-    # If OpenCV library is also compiled, install it too
-    #if [ -f "${B}/src/libraspicam_cv.so"]; then
-    #     cp -r ${B}/src/libraspicam_cv.so* ${D}${libdir}
-    #fi
-}
-
-
