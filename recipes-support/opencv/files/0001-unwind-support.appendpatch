@@ -1,0 +1,13 @@
+diff --git a/modules/sfm/CMakeLists.txt b/modules/sfm/CMakeLists.txt
+index d466af6..69c9a91 100644
+--- a/modules/sfm/CMakeLists.txt
++++ b/modules/sfm/CMakeLists.txt
+@@ -117,7 +117,7 @@ endif()
+ include_directories(${OCV_TARGET_INCLUDE_DIRS_${the_module}})
+ add_subdirectory(src/libmv_light)
+ 
+-ocv_target_link_libraries(${the_module} ${LIBMV_LIGHT_LIBS})
++ocv_target_link_libraries(${the_module} ${LIBMV_LIGHT_LIBS} unwind)
+ 
+ 
+ ### CREATE OPENCV SFM TESTS ###
