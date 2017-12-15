@@ -1,6 +1,11 @@
+# Overrind waylan config already done by mesa
+PACKAGECONFIG = ""
+PACKAGECONFIG[wayland] = ""
+
+DEPENDS_append = " mesa"
 
 PROVIDES += " vc-graphics"
-
+# Already provided in AGL
 do_install_append() {
 	rm ${D}${libdir}/libGLESv2.so*
 	rm ${D}${libdir}/libEGL.so*
