@@ -9,14 +9,16 @@ DEPENDS = "bluez5 i2c-tools wiringPi jsoncpp"
 
 RDEPENDS_${PN} = "python-psutil bluez5 i2c-tools wiringPi jsoncpp userland paho-mqtt-c"
 
-SRCREV = "18580b554eb369d149d085d6da9f3516dd5f9cf1"
-PV = "1.1+gitr${SRCPV}"
+SRCREV = "e5901957dcf73b21f61f85790e451fcfd1ebc4c2"
+PV_append = "+gitr${SRCPV}"
 
 SRC_URI = "git://github.com/app4mc-rover/rover-app.git \
            file://rover-i2c.conf \
-           file://rover-app.service \
-           file://0001-Fix-Compilation-Errors.patch \
-           file://0002-Fix-Coreutil-issue.patch"
+           file://rover-app.service"
+
+# Add patches
+#SRC_URI += "file://0001-Fix-Compilation-Errors.patch \
+#            file://0002-Fix-Coreutil-issue.patch"
 
 S = "${WORKDIR}/git"
 
@@ -24,7 +26,7 @@ EXTRA_OECMAKE += "-Dpkg_config_libdir=${libdir} -DCMAKE_BUILD_TYPE=Release"
 
 # Add services
 SYSTEMD_SERVICE_${PN} = "rover-app.service"
-SYSTEMD_PACKAGES = "${PN}"
+#SYSTEMD_PACKAGES = "${PN}"
 
 PACKAGES = "${PN} ${PN}-dbg ${PN}-dev"
 
