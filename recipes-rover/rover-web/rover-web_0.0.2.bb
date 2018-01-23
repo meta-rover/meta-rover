@@ -9,21 +9,18 @@ inherit systemd
 # FIXME once the license is added to the repo remove this
 INSANE_SKIP_${PN} = "license-checksum"
 
-SRC_URI = "git://github.com/app4mc-rover/rover-web.git;protocol=https \
+SRC_URI = "git://github.com/app4mc-rover/rover-web.git;protocol=https;branch=fix/start_scripts \
            file://rover-web.service \
            file://rover-web-stream.service \
-           file://update_ip.sh \
-           file://start_cam.patch \
-           file://start_roverweb.patch"
+           file://update_ip.sh"
 
-# Modify these as desired
-PV = "1.0+git${SRCPV}"
-SRCREV = "1c7b78d962a6c4980781545e7e00fc890247c9dc"
+SRCREV = "814db6bbedce23970f39e14331bc912814d5d8be"
+PV_append = "+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
 # Rover web dependencis
-RDEPENDS_${PN} = "nodejs net connect serve-static http nodejs-npm socket.io"
+RDEPENDS_${PN} = "nodejs net connect serve-static http nodejs-npm socket.io express path mqtt"
 # Rover web streaming dependencies
 RDEPENDS_${PN}-stream = "libjpeg-turbo mjpg-streamer"
 

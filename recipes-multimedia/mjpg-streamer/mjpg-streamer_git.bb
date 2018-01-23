@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
 PV = "0.4+git${SRCPV}"
 SRCREV = "c1ecfaf7c5cb958cdfd251bdaa9824c3e798f890"
 SRC_URI = "git://github.com/jacksonliam/mjpg-streamer.git;protocol=https \
+	   file://0001-Force-Enable-Raspicam.patch \
           "
 
 DEPENDS = "libgphoto2 v4l-utils userland opencv"
