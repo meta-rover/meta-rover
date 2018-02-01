@@ -1,6 +1,6 @@
 
 # This SHALL to be FIXED
-CXXFLAGS_append = " -Wno-error=format-security"
+#CXXFLAGS_append = " -Wno-error=format-security"
 
 do_configure_prepend() {
 	export SDKTARGETSYSROOT="${PKG_CONFIG_SYSROOT_DIR}"

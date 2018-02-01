@@ -9,10 +9,10 @@ DEPENDS = "bluez5 i2c-tools wiringPi jsoncpp"
 
 RDEPENDS_${PN} = "python-psutil bluez5 i2c-tools wiringPi jsoncpp userland paho-mqtt-c"
 
-SRCREV = "e5901957dcf73b21f61f85790e451fcfd1ebc4c2"
+SRCREV = "a9d938b69c46e21da57343c5a89745229719bf61"
 PV_append = "+gitr${SRCPV}"
 
-SRC_URI = "git://github.com/app4mc-rover/rover-app.git \
+SRC_URI = "git://github.com/app4mc-rover/rover-app.git;branch=fix/warningsMO \
            file://rover-i2c.conf \
            file://rover-app.service"
 
