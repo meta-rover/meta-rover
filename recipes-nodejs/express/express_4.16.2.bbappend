@@ -5,9 +5,9 @@ INSANE_SKIP_${PN} = "license-checksum"
 # This is a copied from the npm.class and edited
 do_compile() {
 	# Copy in any additionally fetched modules
-	if [ -d ${WORKDIR}/node_modules ] ; then
-		cp -a ${WORKDIR}/node_modules ${S}/
-	fi
+	# if [ -d ${WORKDIR}/node_modules ] ; then
+	# 	cp -a ${WORKDIR}/node_modules ${S}/
+	# fi
 	# changing the home directory to the working directory, the .npmrc will
 	# be created in this directory
 	export HOME=${WORKDIR}
@@ -16,5 +16,11 @@ do_compile() {
 	# clear cache before every build
 	npm cache verify
 	# Install pkg into ${S} without going to the registry
-	npm --arch=${NPM_ARCH} --target_arch=${NPM_ARCH} --production --no-registry install
+	npm --arch=${NPM_ARCH} --target_arch=${NPM_ARCH}  --production --no-registry install
+}
+
+do_install() {
+	rm -rf ${D}/usr/lib/node_modules/${PN}
+	install -d ${D}/usr/lib/node_modules/${PN}
+	cp -r ${WORKDIR}/npmpkg/* ${D}/usr/lib/node_modules/${PN}
 }
