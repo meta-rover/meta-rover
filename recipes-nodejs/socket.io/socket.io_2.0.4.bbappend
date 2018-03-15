@@ -1,3 +1,6 @@
+
+INSANE_SKIP_${PN} = "already-stripped"
+
 # This is a workaround to enable building with newer versions of nodejs
 # This is a copied from the npm.class and edited
 do_compile() {
@@ -16,9 +19,15 @@ do_compile() {
 	npm --arch=${NPM_ARCH} --target_arch=${NPM_ARCH} --production --no-registry install
 }
 
-do_install_append() {
-	rm ${D}/${libdir}/node_modules/socket.io/node_modules/uws/uws_linux_51.node
-	rm ${D}/${libdir}/node_modules/socket.io/node_modules/uws/uws_linux_48.node
-	rm ${D}/${libdir}/node_modules/socket.io/node_modules/uws/uws_linux_47.node
-	rm ${D}/${libdir}/node_modules/socket.io/node_modules/uws/uws_linux_46.node
+do_install() {
+        rm -rf ${D}/usr/lib/node_modules/${PN}
+        install -d ${D}/usr/lib/node_modules/${PN}
+        cp -r ${WORKDIR}/npmpkg/* ${D}/usr/lib/node_modules/${PN}
 }
+
+# do_install_append() {
+# 	rm ${D}/${libdir}/node_modules/socket.io/node_modules/uws/uws_linux_51.node
+# 	rm ${D}/${libdir}/node_modules/socket.io/node_modules/uws/uws_linux_48.node
+# 	rm ${D}/${libdir}/node_modules/socket.io/node_modules/uws/uws_linux_47.node
+# 	rm ${D}/${libdir}/node_modules/socket.io/node_modules/uws/uws_linux_46.node
+# }

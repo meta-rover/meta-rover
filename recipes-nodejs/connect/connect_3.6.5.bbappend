@@ -15,3 +15,9 @@ do_compile() {
 	# Install pkg into ${S} without going to the registry
 	npm --arch=${NPM_ARCH} --target_arch=${NPM_ARCH} --production --no-registry install
 }
+
+do_install() {
+        rm -rf ${D}/usr/lib/node_modules/${PN}
+        install -d ${D}/usr/lib/node_modules/${PN}
+        cp -r ${WORKDIR}/npmpkg/* ${D}/usr/lib/node_modules/${PN}
+}
