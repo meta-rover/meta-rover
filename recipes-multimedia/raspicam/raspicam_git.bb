@@ -36,7 +36,7 @@ RDEPENDS_${PN}-dbg = ""
 SRC_URI = "git://github.com/cedricve/raspicam.git;protocol=https;branch=master"
 
 # SHA1-Hash when downloading from git
-SRCREV = "b585d1e6c42118dfcf237ffa148fd7fbd36a59f5"
+SRCREV = "59d92e6907859e59bd40645af6038e2122cd45ef"
 
 # This should be correct for git-based fetching
 S = "${WORKDIR}/git" 
