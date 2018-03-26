@@ -23,11 +23,9 @@ do_install() {
         rm -rf ${D}/usr/lib/node_modules/${PN}
         install -d ${D}/usr/lib/node_modules/${PN}
         cp -r ${WORKDIR}/npmpkg/* ${D}/usr/lib/node_modules/${PN}
-}
 
-# do_install_append() {
-# 	rm ${D}/${libdir}/node_modules/socket.io/node_modules/uws/uws_linux_51.node
-# 	rm ${D}/${libdir}/node_modules/socket.io/node_modules/uws/uws_linux_48.node
-# 	rm ${D}/${libdir}/node_modules/socket.io/node_modules/uws/uws_linux_47.node
-# 	rm ${D}/${libdir}/node_modules/socket.io/node_modules/uws/uws_linux_46.node
-# }
+ 	rm ${D}/${libdir}/node_modules/socket.io/node_modules/uws/uws_linux_51.node
+ 	rm ${D}/${libdir}/node_modules/socket.io/node_modules/uws/uws_linux_48.node
+ 	rm ${D}/${libdir}/node_modules/socket.io/node_modules/uws/uws_linux_47.node
+ 	rm ${D}/${libdir}/node_modules/socket.io/node_modules/uws/uws_linux_46.node
+}
