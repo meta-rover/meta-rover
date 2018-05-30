@@ -9,6 +9,8 @@ DEPENDS = "bluez5 i2c-tools wiringpi jsoncpp userland paho-mqtt-c raspicam"
 
 RDEPENDS_${PN} = "python-psutil bluez5 i2c-tools wiringpi jsoncpp userland paho-mqtt-c raspicam"
 
+PROVIDES += "rover-api"
+
 SRCREV = "1732c6148e748ee25ee398d1db689e10d5225586"
 PV_append = "+gitr${SRCPV}"
 
