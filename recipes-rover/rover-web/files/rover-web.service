@@ -1,9 +1,0 @@
-[Unit]
-Description = Rover Web HTTP Server
-After = network-online.target
-
-[Service]
-ExecStart = /bin/bash /opt/rover-web/scripts/bash/setup/start_roverweb.sh
-
-[Install]
-WantedBy = multi-user.target
