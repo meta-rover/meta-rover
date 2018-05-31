@@ -11,7 +11,7 @@ RDEPENDS_${PN} = "python-psutil bluez5 i2c-tools wiringpi jsoncpp userland paho-
 
 PROVIDES += "rover-api"
 
-SRCREV = "499ce8c8ee2e796677dba96adb4474161dea4af3"
+SRCREV = "25d6c14018b9c15067449acf8328f4af5645a042"
 PV_append = "+gitr${SRCPV}"
 
 SRC_URI = "git://github.com/app4mc-rover/rover-app.git;branch=master \
