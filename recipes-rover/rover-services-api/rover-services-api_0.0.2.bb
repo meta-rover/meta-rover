@@ -24,7 +24,7 @@ do_configure_prepend() {
 S = "${WORKDIR}/git/app"
 
 PACKAGES = "${PN} ${PN}-dbg ${PN}-dev"
- 
+
 FILES_${PN} = "\
      ${bindir}/* \
      ${libdir}/lib*.so \
@@ -35,6 +35,6 @@ FILES_${PN}-dbg = "\
     ${exec_prefix}/src/debug \
     ${libdir}/.debug"
 
- 
+
 FILES_${PN}-dev = "\
      ${includedir}"
