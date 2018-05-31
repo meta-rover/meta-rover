@@ -11,7 +11,7 @@ RDEPENDS_${PN} = "python-psutil bluez5 i2c-tools wiringpi jsoncpp userland paho-
 
 PROVIDES += "rover-api"
 
-SRCREV = "1732c6148e748ee25ee398d1db689e10d5225586"
+SRCREV = "499ce8c8ee2e796677dba96adb4474161dea4af3"
 PV_append = "+gitr${SRCPV}"
 
 SRC_URI = "git://github.com/app4mc-rover/rover-app.git;branch=master \
@@ -27,7 +27,7 @@ S = "${WORKDIR}/git"
 EXTRA_OECMAKE += "-Dpkg_config_libdir=${libdir} -DCMAKE_BUILD_TYPE=Release"
 
 # Add services
-SYSTEMD_SERVICE_${PN} = "rover-app.service"
+#SYSTEMD_SERVICE_${PN} = "rover-app.service"
 #SYSTEMD_PACKAGES = "${PN}"
 
 PACKAGES = "${PN} ${PN}-dbg ${PN}-dev"
