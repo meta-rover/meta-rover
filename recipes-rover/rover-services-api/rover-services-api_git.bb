@@ -5,12 +5,12 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/LICENSE;md5=86d3f3a95c324c9479bd898696
 
 inherit cmake pythonnative
 
-DEPENDS = "raml2agl-native dbus glib-2.0 af-binder json-c"
+DEPENDS = "raml2agl-native dbus glib-2.0 af-binder json-c python-jinja2-native python-markupsafe-native"
 
 RDEPENDS_${PN} = "dbus glib-2.0 af-binder json-c"
 
-SRCREV = "14b63f77c058dfa3a1fabe50b5ceb139a3571bce"
-PV_append = "+gitr${SRCPV}"
+SRCREV = "3f2c12d5c100dfeed77c56add37479887a48e58a"
+PV_append = "+r${SRCREV}"
 
 SRC_URI = "git://github.com/app4mc-rover/rover-services.git;branch=master"
 

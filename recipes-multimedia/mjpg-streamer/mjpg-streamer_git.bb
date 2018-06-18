@@ -9,7 +9,7 @@ SRC_URI = "git://github.com/jacksonliam/mjpg-streamer.git;protocol=https \
 	   file://0001-Force-Enable-Raspicam.patch \
           "
 
-DEPENDS = "libgphoto2 v4l-utils userland opencv"
+DEPENDS = "libgphoto2 v4l-utils userland opencv libsdl"
 
 S = "${WORKDIR}/git/mjpg-streamer-experimental"
 inherit cmake
