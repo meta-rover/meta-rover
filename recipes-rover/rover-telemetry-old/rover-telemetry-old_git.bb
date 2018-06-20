@@ -3,7 +3,7 @@ AUTHOR = "Pedro Cuadra"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://${WORKDIR}/git/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
-inherit cmake aglwgt pkgconfig
+inherit cmake aglwgt
 
 DEPENDS = "dbus glib-2.0 af-binder json-c rover-app rover-services-api rover-app"
 RDEPENDS_${PN} = "dbus glib-2.0 af-binder json-c rover-app rover-services-api rover-app"
